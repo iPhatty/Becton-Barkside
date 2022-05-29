@@ -7,10 +7,11 @@ import App from './App'
 
 const Root = styled.div`
   display: flex;
+  position: relative;
   justify-items: center;
   flex-direction: column;
   min-height: 100vh;
-  max-width: 1440px;
+  max-width: 414px;
   margin: 0 auto;
 `
 

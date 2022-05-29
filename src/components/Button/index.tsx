@@ -27,15 +27,20 @@ function setVariantStyles(props: ThemeProps) {
   }
 }
 
-const StyledButton = styled.button<IStyledButton>`
+export const StyledButton = styled.button<IStyledButton>`
   ${(props) => ({ ...setVariantStyles(props) })};
-  border: none;
+  border: 1px solid transparent;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 16px;
   border-radius: 42px;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+  font-family: inherit;
 `
 
 interface IButton {
