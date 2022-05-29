@@ -46,7 +46,7 @@ const StyledLink = styled(Link)`
   color: ${(props) => props.theme.colors.primary};
 `
 
-export function Home() {
+export function Main() {
   return (
     <Background>
       <Outlet />
@@ -80,7 +80,7 @@ export function Login() {
       </header>
       <LoginForm />
       <Paragraph>
-        No account? <StyledLink to='/sign-up'>Sign up here</StyledLink>
+        No account? <StyledLink to='/signup'>Sign up here</StyledLink>
       </Paragraph>
     </Frame>
   )
