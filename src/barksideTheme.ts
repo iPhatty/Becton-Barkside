@@ -9,6 +9,7 @@ const barksideTheme: DefaultTheme = {
     black: "#1D1D1D",
     grey: "#E7E5E5",
     white: "#FFFFFF",
+    red: "#E74C3C",
   },
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
@@ -41,6 +41,15 @@ const StyledLink = styled(Link)`
 `;
 
 export default function SignUp() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(email, password, passwordConfirm);
+  };
+
   return (
     <Background>
       <Frame>
@@ -51,10 +60,22 @@ export default function SignUp() {
             organisations
           </Paragraph>
         </header>
-        <StyledForm>
-          <Input type="email" placeholder="Email" />
-          <Input type="password" placeholder="Password" />
-          <Input type="password" placeholder="Confirm password" />
+        <StyledForm onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Confirm password"
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+          />
           <Button variant="secondary">Create account</Button>
         </StyledForm>
         <Paragraph>
