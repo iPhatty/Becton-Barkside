@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Header from '../../components/Header'
 import styled from 'styled-components'
 
@@ -48,7 +48,10 @@ export default function SignUp() {
             organisations
           </Paragraph>
         </header>
-        <Paragraph>Already have an account? <StyledLink to='/login'>Log in here</StyledLink></Paragraph>
+        <Paragraph>
+          Already have an account?{' '}
+          <StyledLink to='/login'>Log in here</StyledLink>
+        </Paragraph>
       </Frame>
     </Background>
   )
