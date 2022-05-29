@@ -3,6 +3,7 @@ import { Link, Outlet, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Button, { StyledButton } from '../../components/Button'
 import Header from '../../components/Header'
+import LoginForm from './LoginForm'
 
 const Background = styled.div`
   width: 100%;
@@ -15,7 +16,7 @@ const Frame = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 60px 44px;
+  padding: 44px 44px 22px;
 
   position: absolute;
   min-height: 400px;
@@ -77,11 +78,9 @@ export function Login() {
       <header>
         <Header>Welcome Back</Header>
       </header>
-      <Actions>
-        <Button variant='primary'>Log In</Button>
-      </Actions>
+      <LoginForm />
       <Paragraph>
-        No account? <StyledLink to="/sign-up">Sign up here</StyledLink>
+        No account? <StyledLink to='/sign-up'>Sign up here</StyledLink>
       </Paragraph>
     </Frame>
   )
