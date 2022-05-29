@@ -40,14 +40,24 @@ export const StyledButton = styled.button<IStyledButton>`
   &:hover {
     text-decoration: underline;
   }
+  font-size: 1rem;
   font-family: inherit;
 `
 
 interface IButton {
   variant?: Variants
   children: React.ReactNode
+  onClick?: () => void
 }
 
-export default function Button({ children, variant = 'default' }: IButton) {
-  return <StyledButton variant={variant}>{children}</StyledButton>
+export default function Button({
+  children,
+  onClick,
+  variant = 'default',
+}: IButton) {
+  return (
+    <StyledButton onClick={onClick} variant={variant}>
+      {children}
+    </StyledButton>
+  )
 }

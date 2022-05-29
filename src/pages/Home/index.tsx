@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Button, { StyledButton } from '../../components/Button'
 import Header from '../../components/Header'
@@ -17,7 +18,7 @@ const Frame = styled.div`
   padding: 60px 44px;
 
   position: absolute;
-  height: 400px;
+  min-height: 400px;
   width: 100%;
   left: 0px;
   bottom: 0px;
@@ -28,11 +29,10 @@ const Frame = styled.div`
 `
 
 const Actions = styled.div`
-  margin-top: auto;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  ${StyledButton}:first-child {
+  ${StyledButton}:first-child:not(:last-child) {
     margin-bottom: 28px;
   }
 `
@@ -41,21 +41,48 @@ const Paragraph = styled.p`
   text-align: center;
 `
 
+const StyledLink = styled(Link)`
+  color: ${(props) => props.theme.colors.primary};
+`
+
 export function Home() {
   return (
     <Background>
-      <Frame>
-        <div>
-          <Header>Beckton Barkside</Header>
-          <Paragraph>
-            Community for the dog lovers of Beckton Parkside
-          </Paragraph>
-        </div>
-        <Actions>
-          <Button variant='primary'>Log In</Button>
-          <Button variant='secondary'>Sign Up</Button>
-        </Actions>
-      </Frame>
+      <Outlet />
     </Background>
+  )
+}
+
+export function MainMenu() {
+  const navigate = useNavigate()
+  return (
+    <Frame>
+      <header>
+        <Header>Beckton Barkside</Header>
+        <Paragraph>Community for the dog lovers of Beckton Parkside</Paragraph>
+      </header>
+      <Actions>
+        <Button variant='primary' onClick={() => navigate('/login')}>
+          Log In
+        </Button>
+        <Button variant='secondary'>Sign Up</Button>
+      </Actions>
+    </Frame>
+  )
+}
+
+export function Login() {
+  return (
+    <Frame>
+      <header>
+        <Header>Welcome Back</Header>
+      </header>
+      <Actions>
+        <Button variant='primary'>Log In</Button>
+      </Actions>
+      <Paragraph>
+        No account? <StyledLink to="/sign-up">Sign up here</StyledLink>
+      </Paragraph>
+    </Frame>
   )
 }
