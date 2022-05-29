@@ -1,9 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import styled, { ThemeProvider } from 'styled-components'
-import { barksideTheme } from './barksideTheme'
-import { GlobalStyle } from './globalStyle'
-import App from './App'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import styled, { ThemeProvider } from "styled-components";
+import { barksideTheme } from "./barksideTheme";
+import { GlobalStyle } from "./globalStyle";
+import App from "./App";
 
 const Root = styled.div`
   display: flex;
@@ -13,9 +13,9 @@ const Root = styled.div`
   min-height: 100vh;
   max-width: 414px;
   margin: 0 auto;
-`
+`;
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider theme={barksideTheme}>
       <GlobalStyle />
@@ -24,4 +24,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       </Root>
     </ThemeProvider>
   </React.StrictMode>
-)
+);

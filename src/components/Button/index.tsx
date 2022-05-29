@@ -1,29 +1,29 @@
-import React from 'react'
-import styled, { DefaultTheme } from 'styled-components'
+import React from "react";
+import styled, { DefaultTheme } from "styled-components";
 
-type Variants = 'default' | 'primary' | 'secondary'
+type Variants = "default" | "primary" | "secondary";
 
 interface IStyledButton {
-  variant: Variants
+  variant: Variants;
 }
 
 interface ThemeProps extends IStyledButton {
-  theme: DefaultTheme
+  theme: DefaultTheme;
 }
 
 function setVariantStyles(props: ThemeProps) {
   switch (props.variant) {
-    case 'primary':
+    case "primary":
       return {
-        'background-color': props.theme.colors.primary,
+        "background-color": props.theme.colors.primary,
         color: props.theme.colors.white,
-      }
-    case 'secondary':
+      };
+    case "secondary":
       return {
-        'background-color': props.theme.colors.secondary,
-      }
+        "background-color": props.theme.colors.secondary,
+      };
     default:
-      return { 'background-color': props.theme.colors.grey }
+      return { "background-color": props.theme.colors.grey };
   }
 }
 
@@ -42,22 +42,22 @@ export const StyledButton = styled.button<IStyledButton>`
   }
   font-size: 1rem;
   font-family: inherit;
-`
+`;
 
 interface IButton {
-  variant?: Variants
-  children: React.ReactNode
-  onClick?: () => void
+  variant?: Variants;
+  children: React.ReactNode;
+  onClick?: () => void;
 }
 
 export default function Button({
   children,
   onClick,
-  variant = 'default',
+  variant = "default",
 }: IButton) {
   return (
     <StyledButton onClick={onClick} variant={variant}>
       {children}
     </StyledButton>
-  )
+  );
 }
