@@ -4,6 +4,8 @@ import styled, { ThemeProvider } from "styled-components";
 import { barksideTheme } from "./barksideTheme";
 import { GlobalStyle } from "./globalStyle";
 import App from "./App";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const Root = styled.div`
   display: flex;
@@ -21,6 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <GlobalStyle />
       <Root>
         <App />
+        <ToastContainer />
       </Root>
     </ThemeProvider>
   </React.StrictMode>

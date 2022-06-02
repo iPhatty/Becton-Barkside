@@ -24,7 +24,7 @@ const StyledError = styled.p`
 `;
 
 interface ILoginForm {
-  onSubmit?: (email: string, password: string) => void;
+  onSubmit?: ({ email, password }: { email: string; password: string }) => void;
 }
 
 const loginSchema = object({
@@ -42,7 +42,7 @@ export default function LoginForm({ onSubmit }: ILoginForm) {
     setError(null);
     try {
       await loginSchema.validate({ email, password });
-      onSubmit?.(email, password);
+      onSubmit?.({ email, password });
     } catch (error) {
       if (error instanceof ValidationError) setError(error);
     }
