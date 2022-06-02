@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { object, string, ValidationError } from "yup";
+import { toast } from "react-toastify";
+import styled from "styled-components";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Header from "../../components/Header";
 import { StyledForm } from "../MainMenu/LoginForm";
-import styled from "styled-components";
+import { useAuth } from "../../utils/authContext";
 
 const Background = styled.div`
   width: 100%;
@@ -44,10 +47,38 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const auth = useAuth();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const signupSchema = object({
+    passwordConfirm: string().required("Confirm your password 😢"),
+    password: string().required("Don't forget your password 😢"),
+    email: string().email().required("Email is required"),
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(email, password, passwordConfirm);
+    try {
+      await signupSchema.validate({
+        email,
+        password,
+        passwordConfirm,
+      });
+      if (password !== passwordConfirm)
+        return toast.error("Passwords don't match", {
+          toastId: "signup-error-password-match",
+        });
+      await auth.signUp(email, password);
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        setError(error?.path ?? null);
+        toast.error(error.message, {
+          toastId: error.message,
+          autoClose: 3000,
+        });
+      }
+      if (error instanceof Error) toast.error(error.message);
+    }
   };
 
   return (
@@ -65,16 +96,19 @@ export default function SignUp() {
             type="text"
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
+            error={error === "email"}
           />
           <Input
             type="password"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
+            error={error === "password"}
           />
           <Input
             type="password"
             placeholder="Confirm password"
             onChange={(e) => setPasswordConfirm(e.target.value)}
+            error={error === "passwordConfirm"}
           />
           <Button variant="secondary">Create account</Button>
         </StyledForm>

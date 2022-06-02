@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import styled, { ThemeProvider } from "styled-components";
+import AuthProvider from "./utils/authContext";
 import { barksideTheme } from "./barksideTheme";
 import { GlobalStyle } from "./globalStyle";
 import App from "./App";
@@ -22,7 +23,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <ThemeProvider theme={barksideTheme}>
       <GlobalStyle />
       <Root>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
         <ToastContainer />
       </Root>
     </ThemeProvider>

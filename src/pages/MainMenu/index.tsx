@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button, { StyledButton } from "../../components/Button";
 import Header from "../../components/Header";
 import LoginForm from "./LoginForm";
-import supabase from "../../supaBase";
+import { useAuth } from "../../utils/authContext";
 import { toast } from "react-toastify";
 
 const Background = styled.div`
@@ -75,6 +75,7 @@ export function MainMenu() {
 }
 
 export function Login() {
+  const auth = useAuth();
   async function handleSubmit({
     email,
     password,
@@ -82,11 +83,11 @@ export function Login() {
     email: string;
     password: string;
   }) {
-    const { user, session, error } = await supabase.auth.signIn({
-      email,
-      password,
-    });
-    if (error) return toast.warn(error.message);
+    try {
+      await auth.signIn(email, password);
+    } catch (error) {
+      if (error instanceof Error) toast.warn(error.message);
+    }
   }
 
   return (
