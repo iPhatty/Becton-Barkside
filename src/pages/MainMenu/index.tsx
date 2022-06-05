@@ -1,5 +1,11 @@
 import React from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import {
+  Link,
+  Location,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import styled from "styled-components";
 import Button, { StyledButton } from "../../components/Button";
 import Header from "../../components/Header";
@@ -68,14 +74,25 @@ export function MainMenu() {
         <Button variant="primary" onClick={() => navigate("/login")}>
           Log In
         </Button>
-        <Button variant="secondary">Sign Up</Button>
+        <Button variant="secondary" onClick={() => navigate("/signup")}>
+          Sign Up
+        </Button>
       </Actions>
     </Frame>
   );
 }
 
+interface ILocationAuthState {
+  from: string;
+}
+
 export function Login() {
   const auth = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const locationState = location.state as ILocationAuthState | undefined;
+  const from = locationState?.from ?? "/main";
+
   async function handleSubmit({
     email,
     password,
@@ -85,6 +102,7 @@ export function Login() {
   }) {
     try {
       await auth.signIn(email, password);
+      navigate(from, { replace: true });
     } catch (error) {
       if (error instanceof Error) toast.warn(error.message);
     }
